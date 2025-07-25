@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Travel Booking Form</title>
+ <script>
+   function calculateTotal() {
+     const travelers = document.getElementById("travelers").value;
+     const economy = 1000, business = 2500, first = 5000;
+     let rate = 0;
+     if (document.getElementById("economy").checked) {
+       rate = economy;
+     } else if (document.getElementById("business").checked) {
+       rate = business;
+     } else if (document.getElementById("first").checked) {
+       rate = first;
+     }
+     const total = travelers * rate;
+     document.getElementById("total-cost").value = "₹ " + total;
+   }
+ </script>
+</head>
+<body>
+ <h1>Travel Booking Form</h1>
+ <form action="/book-travel" method="post">
+   <label for="fullname">Full Name:</label><br>
+   <input type="text" id="fullname" name="fullname" required><br><br>
+   <label for="contact">Contact Information:</label><br>
+   <input type="tel" id="contact" name="contact" required><br><br>
+   <label for="destination">Destination:</label><br>
+   <select id="destination" name="destination" required>
+     <option value="">--Select Destination--</option>
+     <option value="paris">Paris</option>
+     <option value="london">London</option>
+     <option value="tokyo">Tokyo</option>
+     <option value="newyork">New York</option>
+   </select><br><br>
+   <label for="travel-date">Travel Date:</label><br>
+   <input type="date" id="travel-date" name="travel-date" required><br><br>
+   <label for="travelers">Number of Travelers:</label><br>
+   <input type="number" id="travelers" name="travelers" min="1" value="1" onchange="calculateTotal()" required><br><br>
+   <label>Travel Class:</label><br>
+   <input type="radio" id="economy" name="class" value="economy" onclick="calculateTotal()" required>
+   <label for="economy">Economy</label><br>
+   <input type="radio" id="business" name="class" value="business" onclick="calculateTotal()">
+   <label for="business">Business</label><br>
+   <input type="radio" id="first" name="class" value="first" onclick="calculateTotal()">
+   <label for="first">First Class</label><br><br>
+   <input type="checkbox" id="insurance" name="insurance" value="yes">
+   <label for="insurance">Opt for Travel Insurance</label><br><br>
+   <label for="total-cost">Total Cost:</label><br>
+   <input type="text" id="total-cost" name="total-cost" readonly><br><br>
+   <button type="submit">Book Now</button>
+ </form>
+</body>
+</html>
